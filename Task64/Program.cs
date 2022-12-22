@@ -1,45 +1,14 @@
-﻿Console.WriteLine("Введите размеры массива:");
+﻿Console.WriteLine("Вывод чисел от N до 1:");
 
-int M = ReadInt("M = ");
 int N = ReadInt("N = ");
 
-int[,] array = new int[M, N];
+PrintRecursive(N);
 
-RandomizeArray(array);
-
-Console.WriteLine("Исходный массив:");
-PrintArray(array);
-
-SortArray(array);
-
-Console.WriteLine("Массив с отсортированными строками:");
-PrintArray(array);
-
-void SortArray(int[,] array)
+void PrintRecursive(int n)
 {
-    for (int y = 0; y < N; y++)
-        SortLine(array, y);
-}
-
-void SortLine(int[,] array, int y)
-{
-    for (int x = 0; x < M - 1; x++)
-        for (int x2 = x + 1; x2 < M; x2++)
-        {
-            if (array[x, y] >= array[x2, y])
-                continue;
-            int temp = array[x, y];
-            array[x, y] = array[x2, y];
-            array[x2, y] = temp;
-        }
-}
-
-void RandomizeArray(int[,] array)
-{
-    Random rnd = new Random();
-    for (int x = 0; x < M; x++)
-        for (int y = 0; y < N; y++)
-            array[x, y] = rnd.Next(0, 20);
+    Console.Write($"{n} ");
+    if (n > 1)
+        PrintRecursive(n - 1);
 }
 
 int ReadInt(string prompt)
@@ -49,12 +18,3 @@ int ReadInt(string prompt)
     return x;
 }
 
-void PrintArray(int[,] array)
-{
-    for (int y = 0; y < N; y++)
-    {
-        for (int x = 0; x < M; x++)
-            Console.Write($"{array[x, y],5} ");
-        Console.WriteLine("");
-    }
-}
